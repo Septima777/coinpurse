@@ -15,7 +15,7 @@ public class ConsoleDialog {
 	public static final String CURRENCY = "Baht";
 	// use a single java.util.Scanner object for reading all input.
 	private static Scanner console = new Scanner(System.in);
-	// call Purse. 
+	// call Purse.
 	private Purse purse;
 
 	/**
@@ -55,7 +55,7 @@ public class ConsoleDialog {
 	}
 
 	/**
-	 * Ask the user how many coins to deposit into purse, then deposit them.
+	 * Ask the user how many value to deposit into purse, then deposit them.
 	 * Show result of success or failure.
 	 */
 	public void depositDialog() {
@@ -63,11 +63,16 @@ public class ConsoleDialog {
 		String inline = console.nextLine();
 		// parse input line into numbers
 		Scanner scanline = new Scanner(inline);
+		Valuable valuable;
 		while (scanline.hasNextDouble()) {
 			double value = scanline.nextDouble();
-			Coin coin = new Coin(value);
-			System.out.printf("Deposit %s... ", coin.toString());
-			boolean ok = purse.insert(coin);
+			if (value >= 20) {
+				valuable = new BankNote(value);
+			} else {
+				valuable = new Coin(value);
+			}
+			System.out.printf("Deposit %s... ", valuable.toString());
+			boolean ok = purse.insert(valuable);
 			System.out.println((ok ? "ok" : "FAILED"));
 		}
 		if (scanline.hasNext())
@@ -76,19 +81,19 @@ public class ConsoleDialog {
 
 	/**
 	 * Ask how much money (Baht) to withdraw and then do it. After withdraw,
-	 * show the values of the coins we withdrew.
+	 * show the values of the coins or banknote we withdrew.
 	 */
 	public void withdrawDialog() {
 		System.out.print("How much to withdraw? ");
 		if (console.hasNextDouble()) {
 			double amount = console.nextDouble();
-			Coin[] coins = purse.withdraw(amount);
-			if (coins == null)
+			Valuable[] valuables = purse.withdraw(amount);
+			if (valuables == null)
 				System.out.printf("Sorry, couldn't withdraw %g %s\n", amount, CURRENCY);
 			else {
 				System.out.print("You withdrew:");
-				for (int k = 0; k < coins.length; k++) {
-					System.out.print(" " + coins[k].toString());
+				for (int k = 0; k < valuables.length; k++) {
+					System.out.print(" " + valuables[k].toString());
 				}
 				System.out.println();
 			}
