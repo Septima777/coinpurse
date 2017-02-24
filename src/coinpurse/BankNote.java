@@ -7,16 +7,11 @@ package coinpurse;
  *
  */
 
-public class BankNote implements Valuable {
+public class BankNote extends AbstractValuable implements Valuable {
 	/* default Serial number */
 	private static long nextSerialNumber = 1000000;
-	/* Value of the banknote */
-	private double value;
 	/* Serail number of the banknote */
 	private long serialNumber;
-	/* Currency of the banknote */
-	private String currency;
-
 	/**
 	 * A banknote with given value using the default currency.
 	 * 
@@ -67,20 +62,21 @@ public class BankNote implements Valuable {
 
 	/**
 	 * check 2 banknotes that are equals in the same value and currency.
+	 * now it use equals from AbstractValuable.
 	 */
-	public boolean equals(Object object) {
-		if (object == null) {
-			return false;
-		}
-		if (object.getClass() != this.getClass()) {
-			return false;
-		}
-		BankNote bankNote = (BankNote) object;
-		if (this.currency.equals(bankNote.currency) && (this.value == bankNote.value)) {
-			return true;
-		}
-		return false;
-	}
+//	public boolean equals(Object object) {
+//		if (object == null) {
+//			return false;
+//		}
+//		if (object.getClass() != this.getClass()) {
+//			return false;
+//		}
+//		BankNote bankNote = (BankNote) object;
+//		if (this.currency.equals(bankNote.currency) && (this.value == bankNote.value)) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	/**
 	 * return the value in each currency.

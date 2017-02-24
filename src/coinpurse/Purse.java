@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class Purse implements Valuable {
+public class Purse {
 
 	/**
 	 * Configure and start the application.
@@ -178,16 +178,6 @@ public class Purse implements Valuable {
 		return (money.size() + " coins with value " + this.getBalance());
 	}
 
-	@Override
-	public double getValue() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String getCurrency() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }
