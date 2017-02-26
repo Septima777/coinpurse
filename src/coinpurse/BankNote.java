@@ -8,17 +8,18 @@ package coinpurse;
  */
 
 public class BankNote extends AbstractValuable implements Valuable {
-	/* default Serial number */
-	private static long nextSerialNumber = 1000000;
+	
+	
 	/* Serail number of the banknote */
 	private long serialNumber;
+	
 	/**
 	 * A banknote with given value using the default currency.
 	 * 
 	 * @param value
 	 */
 	public BankNote(double value) {
-		this.value = value;
+		super(value,DEFAULT_CURRENCY);
 	}
 
 	/**
@@ -28,8 +29,7 @@ public class BankNote extends AbstractValuable implements Valuable {
 	 * @param currency
 	 */
 	public BankNote(double value, String currency) {
-		this.currency = currency;
-		this.value = value;
+		super(value, currency);
 
 	}
 
@@ -61,22 +61,12 @@ public class BankNote extends AbstractValuable implements Valuable {
 	}
 
 	/**
-	 * check 2 banknotes that are equals in the same value and currency.
-	 * now it use equals from AbstractValuable.
+	 * Set the serial number of this object.
+	 * @param serialNumber
 	 */
-//	public boolean equals(Object object) {
-//		if (object == null) {
-//			return false;
-//		}
-//		if (object.getClass() != this.getClass()) {
-//			return false;
-//		}
-//		BankNote bankNote = (BankNote) object;
-//		if (this.currency.equals(bankNote.currency) && (this.value == bankNote.value)) {
-//			return true;
-//		}
-//		return false;
-//	}
+	public void setSerialNumber(long serialNumber) {
+		this.serialNumber = serialNumber;
+	}
 
 	/**
 	 * return the value in each currency.
@@ -84,6 +74,6 @@ public class BankNote extends AbstractValuable implements Valuable {
 	 */
 	@Override
 	public String toString() {
-		return (value + "-currency note [" + serialNumber + "]");
+		return (value + "-"+currency+ " note [" + serialNumber + "]");
 	}
 }
