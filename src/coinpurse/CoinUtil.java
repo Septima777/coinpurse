@@ -2,6 +2,7 @@
 package coinpurse;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -22,12 +23,13 @@ public class CoinUtil {
 	 *         the requested currency.
 	 */
 	public static List<Valuable> filterByCurrency(final List<Valuable> valuelist, String currency) {
-		List<Valuable> list = new ArrayList<Valuable>();
-		for (Valuable v : valuelist)
-			if (currency.equals(v.getCurrency()))
-				list.add(v);
-
-		return list; // return a list of coin references copied from coinlist
+		List<Valuable> variesCurrency = new ArrayList<>();
+		Predicate<Valuable> sameCurrency = (c) -> (c.getCurrency().equals(currency));
+		if (currency != null) {
+			variesCurrency = valuelist.stream().filter(sameCurrency).collect(Collectors.toList());
+		}
+		return variesCurrency; // return a list of coin references copied from
+								// coinlist
 	}
 
 	/**
@@ -131,7 +133,7 @@ public class CoinUtil {
 		coins = makeInternationalCoins();
 		System.out.print("coins= ");
 		printList(coins, " ");
-		 sumByCurrency(coins);
+		sumByCurrency(coins);
 
 	}
 

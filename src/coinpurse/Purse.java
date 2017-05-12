@@ -15,7 +15,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class Purse {
+import coinpurse.strategy.WithdrawStrategy;
+
+public class Purse implements WithdrawStrategy{
 
 	/**
 	 * Configure and start the application.
@@ -177,6 +179,12 @@ public class Purse {
 	public String toString() {
 		return (money.size() + " coins with value " + this.getBalance());
 	}
+
+//	@Override
+//	public void withdraw(double amount, List<coinpurse.strategy.Valuable> valuables) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	
 
